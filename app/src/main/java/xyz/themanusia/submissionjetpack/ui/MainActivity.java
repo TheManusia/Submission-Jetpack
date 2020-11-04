@@ -1,8 +1,10 @@
-package xyz.themanusia.submissionjetpack;
+package xyz.themanusia.submissionjetpack.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import xyz.themanusia.submissionjetpack.R;
 
 public class MainActivity extends AppCompatActivity {
 
