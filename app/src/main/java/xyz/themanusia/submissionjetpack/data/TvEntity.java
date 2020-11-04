@@ -10,7 +10,7 @@ import lombok.Setter;
 public class TvEntity {
     private String tvId;
     private String title;
-    private String descriptiom;
+    private String overview;
     private String image;
     private String rating;
     private String year;
