@@ -11,10 +11,10 @@ import static org.junit.Assert.*;
 
 public class DetailViewModelTest {
     private DetailViewModel viewModel;
-    private MovieEntity dummyMovie = DataDummy.generateMovieData().get(0);
-    private TvEntity dummyTv = DataDummy.generateTvData().get(0);
-    private String movieId = dummyMovie.getMovieId();
-    private String tvId = dummyTv.getTvId();
+    private final MovieEntity dummyMovie = DataDummy.generateMovieData().get(0);
+    private final TvEntity dummyTv = DataDummy.generateTvData().get(0);
+    private final String movieId = dummyMovie.getMovieId();
+    private final String tvId = dummyTv.getTvId();
 
     @Before
     public void setUp() {
