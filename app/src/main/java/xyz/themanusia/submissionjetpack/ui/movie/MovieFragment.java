@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,8 @@ import xyz.themanusia.submissionjetpack.utils.DataDummy;
 
 @NoArgsConstructor
 public class MovieFragment extends Fragment {
+    private MovieViewModel viewModel;
+
     @BindView(R.id.rvMovie)
     RecyclerView rvMovie;
     @BindView(R.id.pbMovie)
@@ -44,7 +47,8 @@ public class MovieFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            List<MovieEntity> movies = DataDummy.generateMovieData();
+            viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
+            List<MovieEntity> movies = viewModel.getMovieList();
             pbMovie.setVisibility(View.GONE);
 
             rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
