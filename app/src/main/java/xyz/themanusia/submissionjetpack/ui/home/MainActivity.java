@@ -1,9 +1,10 @@
 package xyz.themanusia.submissionjetpack.ui.home;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import xyz.themanusia.submissionjetpack.R;
 
@@ -14,11 +15,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*new Handler().postDelayed((Runnable) () ->
-                        startActivity(new Intent(MainActivity.this, HomeActivity.class)),
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setElevation(0);
+            getSupportActionBar().setTitle("");
+        }
+
+        new Handler().postDelayed(() -> {
+                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    finish();
+                },
                 5000);
-                */
-        startActivity(new Intent(MainActivity.this, HomeActivity.class));
-        finish();
     }
 }
