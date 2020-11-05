@@ -47,11 +47,9 @@ public class MovieFragment extends Fragment {
             List<MovieEntity> movies = DataDummy.generateMovieData();
             pbMovie.setVisibility(View.GONE);
 
-            MovieAdapter adapter = new MovieAdapter(movies);
-
             rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
             rvMovie.setHasFixedSize(true);
-            rvMovie.setAdapter(adapter);
+            rvMovie.setAdapter(new MovieAdapter(movies));
         }
     }
 }
