@@ -1,25 +1,23 @@
 package xyz.themanusia.submissionjetpack.ui.detail;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.imageview.ShapeableImageView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.themanusia.submissionjetpack.R;
 import xyz.themanusia.submissionjetpack.data.MovieEntity;
 import xyz.themanusia.submissionjetpack.data.TvEntity;
-import xyz.themanusia.submissionjetpack.utils.DataDummy;
 
 public class DetailActivity extends AppCompatActivity {
+    private DetailViewModel viewModel;
 
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV = "extra_tv";
@@ -47,22 +45,18 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(getResources().getString(R.string.detail));
         }
 
+        viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(DetailViewModel.class);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             if (extras.getString(EXTRA_MOVIE) != null) {
                 String movieId = extras.getString(EXTRA_MOVIE);
-                for (MovieEntity movieEntity : DataDummy.generateMovieData()) {
-                    if (movieEntity.getMovieId().equals(movieId)) {
-                        bindMovie(movieEntity);
-                    }
-                }
+                viewModel.setMovieId(movieId);
+                bindMovie(viewModel.getMovieDetail());
             } else if (extras.getString(EXTRA_TV) != null) {
                 String tvId = extras.getString(EXTRA_TV);
-                for (TvEntity entity : DataDummy.generateTvData()) {
-                    if (entity.getTvId().equals(tvId)) {
-                        bindTv(entity);
-                    }
-                }
+                viewModel.setTvId(tvId);
+                bindTv(viewModel.getTvDetail());
             }
         }
     }
