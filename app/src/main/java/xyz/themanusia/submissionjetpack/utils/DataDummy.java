@@ -231,6 +231,7 @@ public class DataDummy {
                         "76121",
                         "DARLING in the FRANXX",
                         "The story is set in the distant future. The land is ruined, and humanity establishes the mobile fort city Plantation. Pilots produced inside Plantation live in Mistilteinn, also know as the \"birdcage.\" Children live there knowing nothing of the outside world or the freedom of the sky. Their lives consist of battling to carry out missions. Their enemies are mysterious giant lifeforms known as Kyouryuu, and the children pilot robots called Franxx to face off against them. For the children, riding the Franxx proves their existence. \n" +
+                                "\n" +
                                 "A boy named Hiro is called Code:016, and he was once known as a prodigy. However, he has fallen behind, and his existence seems unnecessary. Not piloting a Franxx is the same as ceasing to exist. One day, a mysterious girl known as \"Zero Two\" appears before him. Two horns grow out of her head.",
                         "https://image.tmdb.org/t/p/w600_and_h900_bestv2/pngI2TAtCVnGtuKbIcK8ZScAwZF.jpg",
                         "8.9",

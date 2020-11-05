@@ -11,7 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SubmissionJetpack">
-        <activity android:name=".ui.detail.DetailActivity" />
+        <activity android:name=".ui.detail.DetailActivity"
+            android:parentActivityName=".ui.home.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.home.HomeActivity" />
+        </activity>
         <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.home.MainActivity">
             <intent-filter>

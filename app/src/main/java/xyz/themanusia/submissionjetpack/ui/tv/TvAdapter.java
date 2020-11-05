@@ -78,7 +78,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
 
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
-                intent.putExtra(DetailActivity.EXTRA_MOVIE, entity.getTvId());
+                intent.putExtra(DetailActivity.EXTRA_TV, entity.getTvId());
                 itemView.getContext().startActivity(intent);
             });
         }
