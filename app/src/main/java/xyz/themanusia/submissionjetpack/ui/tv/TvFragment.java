@@ -23,7 +23,6 @@ import xyz.themanusia.submissionjetpack.data.TvEntity;
 
 @NoArgsConstructor
 public class TvFragment extends Fragment {
-    private TvViewModel viewModel;
 
     @BindView(R.id.rvTv)
     RecyclerView rvTv;
@@ -46,7 +45,7 @@ public class TvFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvViewModel.class);
+            TvViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvViewModel.class);
             List<TvEntity> tvEntities = viewModel.getTvList();
             pbTv.setVisibility(View.GONE);
 

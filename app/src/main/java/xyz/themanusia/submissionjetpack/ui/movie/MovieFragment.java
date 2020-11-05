@@ -20,11 +20,9 @@ import butterknife.ButterKnife;
 import lombok.NoArgsConstructor;
 import xyz.themanusia.submissionjetpack.R;
 import xyz.themanusia.submissionjetpack.data.MovieEntity;
-import xyz.themanusia.submissionjetpack.utils.DataDummy;
 
 @NoArgsConstructor
 public class MovieFragment extends Fragment {
-    private MovieViewModel viewModel;
 
     @BindView(R.id.rvMovie)
     RecyclerView rvMovie;
@@ -47,7 +45,7 @@ public class MovieFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
+            MovieViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
             List<MovieEntity> movies = viewModel.getMovieList();
             pbMovie.setVisibility(View.GONE);
 

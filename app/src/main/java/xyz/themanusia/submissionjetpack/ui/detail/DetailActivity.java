@@ -17,7 +17,6 @@ import xyz.themanusia.submissionjetpack.data.MovieEntity;
 import xyz.themanusia.submissionjetpack.data.TvEntity;
 
 public class DetailActivity extends AppCompatActivity {
-    private DetailViewModel viewModel;
 
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV = "extra_tv";
@@ -45,7 +44,7 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(getResources().getString(R.string.detail));
         }
 
-        viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(DetailViewModel.class);
+        DetailViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(DetailViewModel.class);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

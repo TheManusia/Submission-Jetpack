@@ -23,7 +23,7 @@ import xyz.themanusia.submissionjetpack.data.TvEntity;
 import xyz.themanusia.submissionjetpack.ui.detail.DetailActivity;
 
 public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
-    private List<TvEntity> listTv = new ArrayList<>();
+    private final List<TvEntity> listTv = new ArrayList<>();
 
     TvAdapter(List<TvEntity> tvEntities) {
         if (tvEntities == null) return;
@@ -49,7 +49,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
         return listTv.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvTitle)
         TextView tvTitle;
         @BindView(R.id.tvRating)

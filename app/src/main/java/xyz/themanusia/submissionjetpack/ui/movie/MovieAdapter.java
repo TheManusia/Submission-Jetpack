@@ -24,7 +24,7 @@ import xyz.themanusia.submissionjetpack.ui.detail.DetailActivity;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
-    private List<MovieEntity> listMovie = new ArrayList<>();
+    private final List<MovieEntity> listMovie = new ArrayList<>();
 
     public MovieAdapter(List<MovieEntity> movies) {
         if (movies == null) return;
@@ -50,7 +50,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return listMovie.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvTitle)
         TextView tvTitle;
         @BindView(R.id.tvRating)

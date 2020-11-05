@@ -30,7 +30,6 @@
             app:srcCompat="@drawable/dummyposter" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="250dp"
             android:layout_margin="10dp"
@@ -48,7 +47,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView"
                     style="@style/detailInfo"
                     android:text="@string/title"
                     android:textColor="@color/sandy_brown" />
@@ -62,7 +60,6 @@
                     tools:text="@string/title" />
 
                 <TextView
-                    android:id="@+id/textView3"
                     style="@style/detailInfo"
                     android:text="@string/year"
                     android:textColor="@color/sandy_brown" />
@@ -74,13 +71,11 @@
                     tools:text="@string/year" />
 
                 <TextView
-                    android:id="@+id/textView5"
                     style="@style/detailInfo"
                     android:text="@string/rating"
                     android:textColor="@color/sandy_brown" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -132,7 +127,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
