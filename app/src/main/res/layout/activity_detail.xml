@@ -2,11 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/pickled_bluewood"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.detail.DetailActivity">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="250dp"
             android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/ebony_clay"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,28 +50,31 @@
                 <TextView
                     android:id="@+id/textView"
                     style="@style/detailInfo"
+                    android:textColor="@color/sandy_brown"
                     android:text="@string/title" />
 
                 <TextView
                     android:id="@+id/tvTitle"
                     style="@style/detailInfo"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gallery"
                     tools:text="@string/title" />
 
                 <TextView
                     android:id="@+id/textView3"
                     style="@style/detailInfo"
+                    android:textColor="@color/sandy_brown"
                     android:text="@string/year" />
 
                 <TextView
                     android:id="@+id/tvYear"
                     style="@style/detailInfo"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gallery"
                     tools:text="@string/year" />
 
                 <TextView
                     android:id="@+id/textView5"
                     style="@style/detailInfo"
+                    android:textColor="@color/sandy_brown"
                     android:text="@string/rating" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -95,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/gallery"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView"
                         app:layout_constraintStart_toEndOf="@+id/imageView"
                         app:layout_constraintTop_toTopOf="@+id/imageView"
@@ -112,6 +116,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="64dp"
+            app:cardBackgroundColor="@color/ebony_clay"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -128,6 +133,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+                    android:textColor="@color/sandy_brown"
                     android:text="@string/overview" />
 
                 <TextView
@@ -136,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gallery"
                     tools:text="@string/overview" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

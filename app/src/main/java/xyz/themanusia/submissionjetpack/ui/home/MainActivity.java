@@ -20,5 +20,6 @@ public class MainActivity extends AppCompatActivity {
                 5000);
                 */
         startActivity(new Intent(MainActivity.this, HomeActivity.class));
+        finish();
     }
 }
