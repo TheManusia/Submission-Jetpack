@@ -2,24 +2,20 @@ package xyz.themanusia.submissionjetpack2.ui.tv;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import xyz.themanusia.submissionjetpack2.R;
 import xyz.themanusia.submissionjetpack2.data.TvEntity;
+import xyz.themanusia.submissionjetpack2.databinding.ItemsBinding;
 import xyz.themanusia.submissionjetpack2.ui.detail.DetailActivity;
 
 public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
@@ -34,8 +30,8 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items, parent, false);
-        return new ViewHolder(view);
+        ItemsBinding binding = ItemsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
@@ -50,31 +46,24 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvTitle)
-        TextView tvTitle;
-        @BindView(R.id.tvRating)
-        TextView tvRating;
-        @BindView(R.id.tvOverview)
-        TextView tvOverview;
-        @BindView(R.id.imgPoster)
-        ShapeableImageView imgPoster;
+        private final ItemsBinding binding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+        public ViewHolder(@NonNull ItemsBinding itemView) {
+            super(itemView.getRoot());
+            binding = itemView;
         }
 
         public void bind(TvEntity entity) {
-            tvTitle.setText(entity.getTitle());
-            tvRating.setText(entity.getRating());
-            tvOverview.setText(entity.getOverview());
+            binding.tvTitle.setText(entity.getTitle());
+            binding.tvRating.setText(entity.getRating());
+            binding.tvOverview.setText(entity.getOverview());
 
             Glide.with(itemView.getContext())
                     .load(entity.getImage())
                     .apply(new RequestOptions()
                             .placeholder(R.drawable.ic_baseline_warning_24)
                             .error(R.drawable.ic_baseline_warning_24))
-                    .into(imgPoster);
+                    .into(binding.imgPoster);
 
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(itemView.getContext(), DetailActivity.class);

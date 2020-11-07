@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,13 +13,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.imageview.ShapeableImageView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import xyz.themanusia.submissionjetpack2.R;
 import xyz.themanusia.submissionjetpack2.data.MovieEntity;
 import xyz.themanusia.submissionjetpack2.data.TvEntity;
+import xyz.themanusia.submissionjetpack2.databinding.ActivityDetailBinding;
 import xyz.themanusia.submissionjetpack2.ui.home.HomeActivity;
 
 public class DetailActivity extends AppCompatActivity {
@@ -27,22 +25,14 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV = "extra_tv";
 
-    @BindView(R.id.tvTitle)
-    TextView tvTitle;
-    @BindView(R.id.tvRating)
-    TextView tvRating;
-    @BindView(R.id.tvYear)
-    TextView tvYear;
-    @BindView(R.id.tvOverview)
-    TextView tvOverview;
-    @BindView(R.id.imgPoster)
-    ShapeableImageView imgPoster;
+    private ActivityDetailBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        ButterKnife.bind(this);
+        binding = ActivityDetailBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setElevation(0);
@@ -92,35 +82,35 @@ public class DetailActivity extends AppCompatActivity {
                 .from(this)
                 .setType(mimeType)
                 .setChooserTitle("Share now")
-                .setText(getResources().getString(R.string.share_text, tvTitle.getText()))
+                .setText(getResources().getString(R.string.share_text, binding.tvTitle.getText()))
                 .startChooser();
     }
 
     private void bindTv(TvEntity tvEntity) {
-        tvTitle.setText(tvEntity.getTitle());
-        tvOverview.setText(tvEntity.getOverview());
-        tvRating.setText(tvEntity.getRating());
-        tvYear.setText(tvEntity.getYear());
+        binding.tvTitle.setText(tvEntity.getTitle());
+        binding.tvOverview.setText(tvEntity.getOverview());
+        binding.tvRating.setText(tvEntity.getRating());
+        binding.tvYear.setText(tvEntity.getYear());
 
         Glide.with(this)
                 .load(tvEntity.getImage())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.ic_baseline_warning_24)
                         .error(R.drawable.ic_baseline_warning_24))
-                .into(imgPoster);
+                .into(binding.imgPoster);
     }
 
     private void bindMovie(MovieEntity movieEntity) {
-        tvTitle.setText(movieEntity.getTitle());
-        tvOverview.setText(movieEntity.getOverview());
-        tvRating.setText(movieEntity.getRating());
-        tvYear.setText(movieEntity.getYear());
+        binding.tvTitle.setText(movieEntity.getTitle());
+        binding.tvOverview.setText(movieEntity.getOverview());
+        binding.tvRating.setText(movieEntity.getRating());
+        binding.tvYear.setText(movieEntity.getYear());
 
         Glide.with(this)
                 .load(movieEntity.getImage())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.ic_baseline_warning_24)
                         .error(R.drawable.ic_baseline_warning_24))
-                .into(imgPoster);
+                .into(binding.imgPoster);
     }
 }
