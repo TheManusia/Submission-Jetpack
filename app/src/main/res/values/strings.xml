@@ -8,4 +8,6 @@
     <string name="movie">Movie</string>
     <string name="tvshow">Tv Show</string>
     <string name="detail">Detail</string>
+    <string name="share">Share</string>
+    <string name="share_text">Watch %s now.</string>
 </resources>

@@ -1,9 +1,14 @@
 package xyz.themanusia.submissionjetpack.ui.detail;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +20,7 @@ import butterknife.ButterKnife;
 import xyz.themanusia.submissionjetpack.R;
 import xyz.themanusia.submissionjetpack.data.MovieEntity;
 import xyz.themanusia.submissionjetpack.data.TvEntity;
+import xyz.themanusia.submissionjetpack.ui.home.HomeActivity;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -58,6 +64,36 @@ public class DetailActivity extends AppCompatActivity {
                 bindTv(viewModel.getTvDetail());
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.itmShare) {
+            share();
+            return true;
+        } else if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(DetailActivity.this, HomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
+        }
+        return true;
+    }
+
+    private void share() {
+        String mimeType = "text/plain";
+        ShareCompat.IntentBuilder
+                .from(this)
+                .setType(mimeType)
+                .setChooserTitle("Share now")
+                .setText(getResources().getString(R.string.share_text, tvTitle.getText()))
+                .startChooser();
     }
 
     private void bindTv(TvEntity tvEntity) {

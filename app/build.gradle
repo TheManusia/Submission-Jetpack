@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "xyz.themanusia.submissionjetpack"
+        applicationId "xyz.themanusia.submissionjetpack2"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -45,7 +45,11 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
 
     //test
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'junit:junit:junit:1.1.2'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
 }

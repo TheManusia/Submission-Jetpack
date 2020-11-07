@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SubmissionJetpack" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.SubmissionJetpack2" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/pickled_bluewood</item>
         <item name="colorPrimaryVariant">@color/pickled_bluewood</item>

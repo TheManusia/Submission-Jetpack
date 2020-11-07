@@ -10,21 +10,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SubmissionJetpack">
-        <activity android:name=".ui.detail.DetailActivity"
-            android:parentActivityName=".ui.home.HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.HomeActivity" />
-        </activity>
-        <activity android:name=".ui.home.HomeActivity" />
-        <activity android:name=".ui.home.MainActivity">
+        android:theme="@style/Theme.SubmissionJetpack2">
+        <activity android:name="xyz.themanusia.submissionjetpack.ui.home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="xyz.themanusia.submissionjetpack.ui.detail.DetailActivity"
+            android:parentActivityName="xyz.themanusia.submissionjetpack.ui.home.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="xyz.themanusia.submissionjetpack.ui.home.HomeActivity" />
+        </activity>
+        <activity android:name="xyz.themanusia.submissionjetpack.ui.home.HomeActivity" />
     </application>
 
 </manifest>
