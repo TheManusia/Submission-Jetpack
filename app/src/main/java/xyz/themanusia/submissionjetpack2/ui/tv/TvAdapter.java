@@ -55,7 +55,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
 
         public void bind(TvEntity entity) {
             binding.tvTitle.setText(entity.getTitle());
-            binding.tvRating.setText(entity.getRating());
+            binding.tvRating.setText(String.valueOf(entity.getRating()));
             binding.tvOverview.setText(entity.getOverview());
 
             Glide.with(itemView.getContext())

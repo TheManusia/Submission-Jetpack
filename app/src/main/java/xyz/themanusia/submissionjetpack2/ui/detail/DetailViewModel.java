@@ -9,12 +9,12 @@ import xyz.themanusia.submissionjetpack2.utils.DataDummy;
 
 @Setter
 public class DetailViewModel extends ViewModel {
-    private String movieId;
-    private String tvId;
+    private int movieId;
+    private int tvId;
 
     public MovieEntity getMovieDetail() {
         for (MovieEntity movieEntity : DataDummy.generateMovieData()) {
-            if (movieEntity.getMovieId().equals(movieId)) {
+            if (movieEntity.getMovieId() == movieId) {
                 return movieEntity;
             }
         }
@@ -23,7 +23,7 @@ public class DetailViewModel extends ViewModel {
 
     public TvEntity getTvDetail() {
         for (TvEntity entity : DataDummy.generateTvData()) {
-            if (entity.getTvId().equals(tvId)) {
+            if (entity.getTvId() == tvId) {
                 return entity;
             }
         }

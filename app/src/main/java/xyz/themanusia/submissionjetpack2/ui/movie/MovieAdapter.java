@@ -56,7 +56,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         public void bind(MovieEntity movie) {
             binding.tvTitle.setText(movie.getTitle());
-            binding.tvRating.setText(movie.getRating());
+            binding.tvRating.setText(String.valueOf(movie.getRating()));
             binding.tvOverview.setText(movie.getOverview());
 
             Glide.with(itemView.getContext())

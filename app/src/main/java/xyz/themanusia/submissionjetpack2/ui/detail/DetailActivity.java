@@ -2,6 +2,7 @@ package xyz.themanusia.submissionjetpack2.ui.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,8 @@ import xyz.themanusia.submissionjetpack2.databinding.ActivityDetailBinding;
 import xyz.themanusia.submissionjetpack2.ui.home.HomeActivity;
 
 public class DetailActivity extends AppCompatActivity {
+
+    private static final String TAG = DetailActivity.class.getSimpleName();
 
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV = "extra_tv";
@@ -44,14 +47,16 @@ public class DetailActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            if (extras.getString(EXTRA_MOVIE) != null) {
-                String movieId = extras.getString(EXTRA_MOVIE);
+            if (extras.getInt(EXTRA_MOVIE) != 0) {
+                int movieId = extras.getInt(EXTRA_MOVIE);
                 viewModel.setMovieId(movieId);
                 bindMovie(viewModel.getMovieDetail());
-            } else if (extras.getString(EXTRA_TV) != null) {
-                String tvId = extras.getString(EXTRA_TV);
+            } else if (extras.getInt(EXTRA_TV) != 0) {
+                int tvId = extras.getInt(EXTRA_TV);
                 viewModel.setTvId(tvId);
                 bindTv(viewModel.getTvDetail());
+            } else {
+                Log.d(TAG, "onCreate: HAHA FOOL, NO ID HERE");
             }
         }
     }
@@ -89,7 +94,7 @@ public class DetailActivity extends AppCompatActivity {
     private void bindTv(TvEntity tvEntity) {
         binding.tvTitle.setText(tvEntity.getTitle());
         binding.tvOverview.setText(tvEntity.getOverview());
-        binding.tvRating.setText(tvEntity.getRating());
+        binding.tvRating.setText(String.valueOf(tvEntity.getRating()));
         binding.tvYear.setText(tvEntity.getYear());
 
         Glide.with(this)
@@ -103,7 +108,7 @@ public class DetailActivity extends AppCompatActivity {
     private void bindMovie(MovieEntity movieEntity) {
         binding.tvTitle.setText(movieEntity.getTitle());
         binding.tvOverview.setText(movieEntity.getOverview());
-        binding.tvRating.setText(movieEntity.getRating());
+        binding.tvRating.setText(String.valueOf(movieEntity.getRating()));
         binding.tvYear.setText(movieEntity.getYear());
 
         Glide.with(this)
