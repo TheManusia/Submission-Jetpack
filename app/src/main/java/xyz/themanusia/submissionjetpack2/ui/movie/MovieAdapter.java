@@ -1,6 +1,7 @@
 package xyz.themanusia.submissionjetpack2.ui.movie;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -60,7 +61,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             binding.tvOverview.setText(movie.getOverview());
 
             Glide.with(itemView.getContext())
-                    .load(movie.getImage())
+                    .load(DetailActivity.IMAGE_PATH+movie.getImage())
                     .apply(new RequestOptions()
                             .placeholder(R.drawable.ic_baseline_warning_24)
                             .error(R.drawable.ic_baseline_warning_24))

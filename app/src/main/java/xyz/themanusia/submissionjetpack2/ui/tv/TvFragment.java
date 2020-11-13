@@ -11,10 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import java.util.List;
-
 import lombok.NoArgsConstructor;
-import xyz.themanusia.submissionjetpack2.data.TvEntity;
 import xyz.themanusia.submissionjetpack2.databinding.FragmentTvBinding;
 
 @NoArgsConstructor
@@ -33,12 +30,19 @@ public class TvFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (getActivity() != null) {
             TvViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvViewModel.class);
-            List<TvEntity> tvEntities = viewModel.getTvList();
-            binding.pbTv.setVisibility(View.GONE);
+            viewModel.getTvList().observe(getViewLifecycleOwner(), tvEntities -> {
+                binding.rvTv.setLayoutManager(new LinearLayoutManager(getContext()));
+                binding.rvTv.setHasFixedSize(true);
+                binding.rvTv.setAdapter(new TvAdapter(tvEntities));
+            });
 
-            binding.rvTv.setLayoutManager(new LinearLayoutManager(getContext()));
-            binding.rvTv.setHasFixedSize(true);
-            binding.rvTv.setAdapter(new TvAdapter(tvEntities));
+            viewModel.getIsLoading().observe(getViewLifecycleOwner(), aBoolean -> {
+                if (aBoolean) {
+                    binding.pbTv.setVisibility(View.VISIBLE);
+                } else {
+                    binding.pbTv.setVisibility(View.GONE);
+                }
+            });
         }
     }
 }

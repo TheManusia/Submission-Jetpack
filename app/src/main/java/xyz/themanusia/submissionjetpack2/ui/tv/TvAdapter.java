@@ -59,7 +59,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.ViewHolder> {
             binding.tvOverview.setText(entity.getOverview());
 
             Glide.with(itemView.getContext())
-                    .load(entity.getImage())
+                    .load(DetailActivity.IMAGE_PATH+entity.getImage())
                     .apply(new RequestOptions()
                             .placeholder(R.drawable.ic_baseline_warning_24)
                             .error(R.drawable.ic_baseline_warning_24))

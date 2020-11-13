@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="0dp"
@@ -61,14 +72,14 @@
 
                 <TextView
                     style="@style/detailInfo"
-                    android:text="@string/year"
+                    android:text="@string/release_date"
                     android:textColor="@color/sandy_brown" />
 
                 <TextView
                     android:id="@+id/tvYear"
                     style="@style/detailInfo"
                     android:textColor="@color/gallery"
-                    tools:text="@string/year" />
+                    tools:text="@string/release_date" />
 
                 <TextView
                     style="@style/detailInfo"

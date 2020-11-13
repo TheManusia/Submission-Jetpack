@@ -22,3 +22,7 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    apiKey = 'a7df3284ccebc124ac7b8ae227eed2ce'
+}

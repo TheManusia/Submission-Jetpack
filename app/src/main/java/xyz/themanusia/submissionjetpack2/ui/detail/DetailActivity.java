@@ -2,7 +2,6 @@ package xyz.themanusia.submissionjetpack2.ui.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,10 +22,10 @@ import xyz.themanusia.submissionjetpack2.ui.home.HomeActivity;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private static final String TAG = DetailActivity.class.getSimpleName();
-
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV = "extra_tv";
+
+    public static final String IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
 
     private ActivityDetailBinding binding;
 
@@ -50,15 +49,21 @@ public class DetailActivity extends AppCompatActivity {
             if (extras.getInt(EXTRA_MOVIE) != 0) {
                 int movieId = extras.getInt(EXTRA_MOVIE);
                 viewModel.setMovieId(movieId);
-                bindMovie(viewModel.getMovieDetail());
+                viewModel.getMovieDetail().observe(this, this::bindMovie);
             } else if (extras.getInt(EXTRA_TV) != 0) {
                 int tvId = extras.getInt(EXTRA_TV);
                 viewModel.setTvId(tvId);
-                bindTv(viewModel.getTvDetail());
-            } else {
-                Log.d(TAG, "onCreate: HAHA FOOL, NO ID HERE");
+                viewModel.getTvDetail().observe(this, this::bindTv);
             }
         }
+
+        viewModel.getIsLoading().observe(this, aBoolean -> {
+            if (aBoolean) {
+                binding.progressBar.setVisibility(View.VISIBLE);
+            } else {
+                binding.progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -98,7 +103,7 @@ public class DetailActivity extends AppCompatActivity {
         binding.tvYear.setText(tvEntity.getYear());
 
         Glide.with(this)
-                .load(tvEntity.getImage())
+                .load(IMAGE_PATH+tvEntity.getImage())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.ic_baseline_warning_24)
                         .error(R.drawable.ic_baseline_warning_24))
@@ -112,7 +117,7 @@ public class DetailActivity extends AppCompatActivity {
         binding.tvYear.setText(movieEntity.getYear());
 
         Glide.with(this)
-                .load(movieEntity.getImage())
+                .load(IMAGE_PATH+movieEntity.getImage())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.ic_baseline_warning_24)
                         .error(R.drawable.ic_baseline_warning_24))

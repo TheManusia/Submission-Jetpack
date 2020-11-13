@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Submission Jetpack</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="title">Title</string>
-    <string name="year">Year</string>
+    <string name="release_date">Release Date</string>
     <string name="rating">Rating</string>
     <string name="overview">Overview</string>
     <string name="movie">Movie</string>
