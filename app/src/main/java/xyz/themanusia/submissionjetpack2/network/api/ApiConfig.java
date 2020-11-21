@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiConfig {
     public static final String URL = "https://api.themoviedb.org/3/";
 
-    public static ApiService getApiService() {
+    public ApiService getApiService() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
                 .setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient.Builder()

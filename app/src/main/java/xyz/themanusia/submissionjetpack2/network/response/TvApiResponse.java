@@ -12,7 +12,7 @@ import xyz.themanusia.submissionjetpack2.data.TvEntity;
 @Getter
 @Setter
 @AllArgsConstructor
-public class TvResponse {
+public class TvApiResponse {
     @SerializedName("results")
     private List<TvEntity> tvList;
 }

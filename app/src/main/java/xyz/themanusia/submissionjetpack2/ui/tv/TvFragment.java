@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import lombok.NoArgsConstructor;
 import xyz.themanusia.submissionjetpack2.databinding.FragmentTvBinding;
+import xyz.themanusia.submissionjetpack2.network.api.ApiConfig;
+import xyz.themanusia.submissionjetpack2.viewmodel.ViewModelFactory;
 
 @NoArgsConstructor
 public class TvFragment extends Fragment {
@@ -29,7 +31,8 @@ public class TvFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getActivity() != null) {
-            TvViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvViewModel.class);
+            ViewModelFactory factory = ViewModelFactory.getInstance(new ApiConfig());
+            TvViewModel viewModel = new ViewModelProvider(this, factory).get(TvViewModel.class);
             viewModel.getTvList().observe(getViewLifecycleOwner(), tvEntities -> {
                 binding.rvTv.setLayoutManager(new LinearLayoutManager(getContext()));
                 binding.rvTv.setHasFixedSize(true);

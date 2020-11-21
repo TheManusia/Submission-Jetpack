@@ -18,9 +18,11 @@ import xyz.themanusia.submissionjetpack2.R;
 import xyz.themanusia.submissionjetpack2.data.MovieEntity;
 import xyz.themanusia.submissionjetpack2.data.TvEntity;
 import xyz.themanusia.submissionjetpack2.databinding.ActivityDetailBinding;
+import xyz.themanusia.submissionjetpack2.network.api.ApiConfig;
 import xyz.themanusia.submissionjetpack2.ui.home.HomeActivity;
+import xyz.themanusia.submissionjetpack2.viewmodel.ViewModelFactory;
 
-public class DetailActivity extends AppCompatActivity {
+public class    DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV = "extra_tv";
@@ -42,7 +44,8 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(getResources().getString(R.string.detail));
         }
 
-        DetailViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(DetailViewModel.class);
+        ViewModelFactory factory = ViewModelFactory.getInstance(new ApiConfig());
+        DetailViewModel viewModel = new ViewModelProvider(this, factory).get(DetailViewModel.class);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

@@ -12,7 +12,7 @@ import xyz.themanusia.submissionjetpack2.data.MovieEntity;
 @Getter
 @Setter
 @AllArgsConstructor
-public class MovieResponse {
+public class MovieApiResponse {
     @SerializedName("results")
     private List<MovieEntity> movieList;
 }

@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import lombok.NoArgsConstructor;
 import xyz.themanusia.submissionjetpack2.databinding.FragmentMovieBinding;
+import xyz.themanusia.submissionjetpack2.network.api.ApiConfig;
+import xyz.themanusia.submissionjetpack2.viewmodel.ViewModelFactory;
 
 @NoArgsConstructor
 public class MovieFragment extends Fragment {
@@ -35,7 +37,8 @@ public class MovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getActivity() != null) {
-            MovieViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
+            ViewModelFactory factory = ViewModelFactory.getInstance(new ApiConfig());
+            MovieViewModel viewModel = new ViewModelProvider(this, factory).get(MovieViewModel.class);
             viewModel.getMovieList().observe(getViewLifecycleOwner(), movieEntities -> {
                 binding.rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
                 binding.rvMovie.setHasFixedSize(true);

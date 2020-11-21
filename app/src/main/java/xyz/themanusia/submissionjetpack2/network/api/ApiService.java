@@ -6,15 +6,15 @@ import retrofit2.http.Path;
 import xyz.themanusia.submissionjetpack2.BuildConfig;
 import xyz.themanusia.submissionjetpack2.data.MovieEntity;
 import xyz.themanusia.submissionjetpack2.data.TvEntity;
-import xyz.themanusia.submissionjetpack2.network.response.MovieResponse;
-import xyz.themanusia.submissionjetpack2.network.response.TvResponse;
+import xyz.themanusia.submissionjetpack2.network.response.MovieApiResponse;
+import xyz.themanusia.submissionjetpack2.network.response.TvApiResponse;
 
 public interface ApiService {
     @GET("movie/top_rated?api_key=" + BuildConfig.APIKEY)
-    Call<MovieResponse> getMovie();
+    Call<MovieApiResponse> getMovie();
 
     @GET("tv/top_rated?api_key=" + BuildConfig.APIKEY)
-    Call<TvResponse> getTv();
+    Call<TvApiResponse> getTv();
 
     @GET("movie/{id}?api_key=" + BuildConfig.APIKEY)
     Call<MovieEntity> getMovieDetail(@Path("id") int id);
