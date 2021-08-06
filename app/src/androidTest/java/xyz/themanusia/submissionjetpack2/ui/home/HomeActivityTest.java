@@ -1,18 +1,5 @@
 package xyz.themanusia.submissionjetpack2.ui.home;
 
-import androidx.test.espresso.contrib.RecyclerViewActions;
-import androidx.test.rule.ActivityTestRule;
-
-import org.junit.Rule;
-import org.junit.Test;
-
-import java.util.List;
-
-import xyz.themanusia.submissionjetpack2.R;
-import xyz.themanusia.submissionjetpack2.data.MovieEntity;
-import xyz.themanusia.submissionjetpack2.data.TvEntity;
-import xyz.themanusia.submissionjetpack2.utils.DataDummy;
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -20,19 +7,36 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-public class HomeActivityTest {
-    private final List<MovieEntity> dummyMovie = DataDummy.generateMovieData();
-    private final List<TvEntity> dummyTv = DataDummy.generateTvData();
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.espresso.IdlingRegistry;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 
-    @Rule
-    public ActivityTestRule activityTestRule = new ActivityTestRule<>(HomeActivity.class);
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import xyz.themanusia.submissionjetpack2.R;
+import xyz.themanusia.submissionjetpack2.utils.EspressoIdlingResource;
+
+public class HomeActivityTest {
+
+    @Before
+    public void setup() {
+        ActivityScenario.launch(HomeActivity.class);
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource());
+    }
+
+    @After
+    public void tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource());
+    }
 
     //Memastikan rvMovie tampil
     //Scroll rvMovie ke data terakhir
     @Test
     public void loadMovie() {
         onView(withId(R.id.rvMovie)).check(matches(isDisplayed()));
-        onView(withId(R.id.rvMovie)).perform(RecyclerViewActions.scrollToPosition(dummyMovie.size()));
+        onView(withId(R.id.rvMovie)).perform(RecyclerViewActions.scrollToPosition(10));
     }
 
     //Klik TabLayout dengan teks TV SHOW
@@ -42,25 +46,21 @@ public class HomeActivityTest {
     public void loadTv() {
         onView(withText("TV SHOW")).perform(click());
         onView(withId(R.id.rvTv)).check(matches(isDisplayed()));
-        onView(withId(R.id.rvTv)).perform(RecyclerViewActions.scrollToPosition(dummyTv.size()));
+        onView(withId(R.id.rvTv)).perform(RecyclerViewActions.scrollToPosition(10));
     }
 
     //Klik data pertama pada rvMovie
-    //Memastikan tvTitle tampil benar
-    //Memastikan tvOverview tampil benar
-    //Memastikan tvYear tampil benar
-    //Memastikan tvRating tampil benar
+    //Memastikan tvTitle tampil
+    //Memastikan tvOverview tampil
+    //Memastikan tvYear tampil
+    //Memastikan tvRating tampil
     @Test
     public void loadDetail() {
         onView(withId(R.id.rvMovie)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.tvTitle)).check(matches(isDisplayed()));
-        onView(withId(R.id.tvTitle)).check(matches(withText(dummyMovie.get(0).getTitle())));
         onView(withId(R.id.tvOverview)).check(matches(isDisplayed()));
-        onView(withId(R.id.tvOverview)).check(matches(withText(dummyMovie.get(0).getOverview())));
         onView(withId(R.id.tvYear)).check(matches(isDisplayed()));
-        onView(withId(R.id.tvYear)).check(matches(withText(dummyMovie.get(0).getYear())));
         onView(withId(R.id.tvRating)).check(matches(isDisplayed()));
-        onView(withId(R.id.tvRating)).check(matches(withText(dummyMovie.get(0).getRating())));
     }
 
 }

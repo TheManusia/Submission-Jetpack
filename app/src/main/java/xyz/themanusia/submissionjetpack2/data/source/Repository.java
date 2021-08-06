@@ -13,6 +13,7 @@ import xyz.themanusia.submissionjetpack2.data.source.remote.RemoteDataSource;
 import xyz.themanusia.submissionjetpack2.data.source.remote.response.MovieResponse;
 import xyz.themanusia.submissionjetpack2.data.source.remote.response.TvResponse;
 import xyz.themanusia.submissionjetpack2.utils.ApiHelper;
+import xyz.themanusia.submissionjetpack2.utils.EspressoIdlingResource;
 
 public class Repository implements DataSource {
     private volatile static Repository INSTANCE = null;
@@ -37,6 +38,7 @@ public class Repository implements DataSource {
 
     @Override
     public LiveData<List<MovieEntity>> getMovieList() {
+        EspressoIdlingResource.increment();
         MutableLiveData<List<MovieEntity>> movies = new MutableLiveData<>();
         remoteDataSource.getMovieList(new ApiHelper.LoadMovieListCallback() {
             @Override
@@ -53,6 +55,7 @@ public class Repository implements DataSource {
                     ));
                 }
                 movies.postValue(movieEntities);
+                EspressoIdlingResource.decrement();
             }
 
             @Override
@@ -65,6 +68,7 @@ public class Repository implements DataSource {
 
     @Override
     public LiveData<MovieEntity> getMovieDetail(int movieId) {
+        EspressoIdlingResource.increment();
         MutableLiveData<MovieEntity> movie = new MutableLiveData<>();
         remoteDataSource.getMovieDetail(movieId, new ApiHelper.LoadMovieDetailCallback() {
             @Override
@@ -77,6 +81,7 @@ public class Repository implements DataSource {
                         movieResponse.getRating(),
                         movieResponse.getYear()
                 ));
+                EspressoIdlingResource.decrement();
             }
 
             @Override
@@ -89,6 +94,7 @@ public class Repository implements DataSource {
 
     @Override
     public LiveData<List<TvEntity>> getTvList() {
+        EspressoIdlingResource.increment();
         MutableLiveData<List<TvEntity>> tvs = new MutableLiveData<>();
         remoteDataSource.getTvList(new ApiHelper.LoadTvListCallback() {
             @Override
@@ -105,6 +111,7 @@ public class Repository implements DataSource {
                     ));
                 }
                 tvs.postValue(tvEntities);
+                EspressoIdlingResource.decrement();
             }
 
             @Override
@@ -117,6 +124,7 @@ public class Repository implements DataSource {
 
     @Override
     public LiveData<TvEntity> getTvDetail(int tvId) {
+        EspressoIdlingResource.increment();
         MutableLiveData<TvEntity> tvs = new MutableLiveData<>();
         remoteDataSource.getTvDetail(tvId, new ApiHelper.LoadTvDetailCallback() {
             @Override
@@ -129,6 +137,7 @@ public class Repository implements DataSource {
                         tvResponse.getRating(),
                         tvResponse.getYear()
                 ));
+                EspressoIdlingResource.decrement();
             }
 
             @Override
