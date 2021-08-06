@@ -5,7 +5,7 @@ import xyz.themanusia.submissionjetpack2.utils.ApiHelper;
 public class RemoteDataSource {
 
     private static RemoteDataSource INSTANCE;
-    private ApiHelper apiHelper;
+    private final ApiHelper apiHelper;
 
     public RemoteDataSource(ApiHelper apiHelper) {
         this.apiHelper = apiHelper;

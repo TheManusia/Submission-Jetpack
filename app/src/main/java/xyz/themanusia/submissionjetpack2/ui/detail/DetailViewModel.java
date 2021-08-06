@@ -13,7 +13,7 @@ public class DetailViewModel extends ViewModel {
     private int movieId;
     @Setter
     private int tvId;
-    private Repository repository;
+    private final Repository repository;
 
     public DetailViewModel(Repository repository) {
         this.repository = repository;

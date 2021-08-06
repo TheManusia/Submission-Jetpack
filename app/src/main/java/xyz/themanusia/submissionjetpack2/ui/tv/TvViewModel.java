@@ -9,7 +9,7 @@ import xyz.themanusia.submissionjetpack2.data.TvEntity;
 import xyz.themanusia.submissionjetpack2.data.source.Repository;
 
 public class TvViewModel extends ViewModel {
-    private Repository repository;
+    private final Repository repository;
 
     public TvViewModel(Repository repository) {
         this.repository = repository;
