@@ -3,11 +3,18 @@ package xyz.themanusia.submissionjetpack2.ui.home;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.tabs.TabLayoutMediator;
+
+import xyz.themanusia.submissionjetpack2.R;
 import xyz.themanusia.submissionjetpack2.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
+
+    @StringRes
+    private static final int[] TAB_TITLES = new int[]{R.string.movie, R.string.tvshow};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,12 +23,11 @@ public class HomeActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        SectionPagerAdapter sectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager(), this);
+        SectionPagerAdapter sectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager(), getLifecycle());
         binding.vpHome.setAdapter(sectionPagerAdapter);
-        binding.tab.setupWithViewPager(binding.vpHome);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setElevation(0);
-        }
+        new TabLayoutMediator(binding.tab, binding.vpHome,
+                (tab, position) -> tab.setText(TAB_TITLES[position]))
+                .attach();
     }
 }
