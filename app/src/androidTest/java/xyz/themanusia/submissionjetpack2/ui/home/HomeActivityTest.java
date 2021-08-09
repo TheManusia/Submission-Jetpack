@@ -55,8 +55,24 @@ public class HomeActivityTest {
     //Memastikan tvYear tampil
     //Memastikan tvRating tampil
     @Test
-    public void loadDetail() {
+    public void loadDetailMovie() {
         onView(withId(R.id.rvMovie)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.tvTitle)).check(matches(isDisplayed()));
+        onView(withId(R.id.tvOverview)).check(matches(isDisplayed()));
+        onView(withId(R.id.tvYear)).check(matches(isDisplayed()));
+        onView(withId(R.id.tvRating)).check(matches(isDisplayed()));
+    }
+
+    //Klik TabLayout dengan teks TV SHOW
+    //Klik data pertama pada rvTv
+    //Memastikan tvTitle tampil
+    //Memastikan tvOverview tampil
+    //Memastikan tvYear tampil
+    //Memastikan tvRating tampil
+    @Test
+    public void loadDetailTv() {
+        onView(withText("TV SHOW")).perform(click());
+        onView(withId(R.id.rvTv)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.tvTitle)).check(matches(isDisplayed()));
         onView(withId(R.id.tvOverview)).check(matches(isDisplayed()));
         onView(withId(R.id.tvYear)).check(matches(isDisplayed()));
