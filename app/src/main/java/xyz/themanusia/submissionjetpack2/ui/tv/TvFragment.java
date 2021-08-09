@@ -20,6 +20,7 @@ import xyz.themanusia.submissionjetpack2.viewmodel.ViewModelFactory;
 @NoArgsConstructor
 public class TvFragment extends Fragment {
     private FragmentTvBinding binding;
+    private TvViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -33,25 +34,25 @@ public class TvFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (getActivity() != null) {
             ViewModelFactory factory = ViewModelFactory.getInstance(new ApiConfig());
-            TvViewModel viewModel = new ViewModelProvider(this, factory).get(TvViewModel.class);
-            viewModel.getTvList().observe(getViewLifecycleOwner(), tvEntities -> {
-                binding.rvTv.setLayoutManager(new LinearLayoutManager(getContext()));
-                binding.rvTv.setHasFixedSize(true);
-                binding.rvTv.setAdapter(new TvAdapter(tvEntities));
-            });
+            viewModel = new ViewModelProvider(this, factory).get(TvViewModel.class);
+            getDatas();
 
-            viewModel.getIsLoading().observe(getViewLifecycleOwner(), aBoolean -> {
-                if (aBoolean) {
-                    binding.pbTv.setVisibility(View.VISIBLE);
-                } else {
-                    binding.pbTv.setVisibility(View.GONE);
-                }
-            });
+            viewModel.getIsLoading().observe(getViewLifecycleOwner(), aBoolean -> binding.swpTv.setRefreshing(aBoolean));
 
             viewModel.getErrorMsg().observe(getViewLifecycleOwner(), msg -> {
                 Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-                binding.pbTv.setVisibility(View.GONE);
+                binding.swpTv.setRefreshing(false);
             });
+
+            binding.swpTv.setOnRefreshListener(this::getDatas);
         }
+    }
+
+    private void getDatas() {
+        viewModel.getTvList().observe(getViewLifecycleOwner(), tvEntities -> {
+            binding.rvTv.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.rvTv.setHasFixedSize(true);
+            binding.rvTv.setAdapter(new TvAdapter(tvEntities));
+        });
     }
 }

@@ -20,6 +20,7 @@ import xyz.themanusia.submissionjetpack2.viewmodel.ViewModelFactory;
 @NoArgsConstructor
 public class MovieFragment extends Fragment {
     private FragmentMovieBinding binding;
+    private MovieViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -39,25 +40,25 @@ public class MovieFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (getActivity() != null) {
             ViewModelFactory factory = ViewModelFactory.getInstance(new ApiConfig());
-            MovieViewModel viewModel = new ViewModelProvider(this, factory).get(MovieViewModel.class);
-            viewModel.getMovieList().observe(getViewLifecycleOwner(), movieEntities -> {
-                binding.rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
-                binding.rvMovie.setHasFixedSize(true);
-                binding.rvMovie.setAdapter(new MovieAdapter(movieEntities));
-            });
+            viewModel = new ViewModelProvider(this, factory).get(MovieViewModel.class);
+            getDatas();
 
-            viewModel.getIsLoading().observe(getActivity(), aBoolean -> {
-                if (aBoolean) {
-                    binding.pbMovie.setVisibility(View.VISIBLE);
-                } else {
-                    binding.pbMovie.setVisibility(View.GONE);
-                }
-            });
+            viewModel.getIsLoading().observe(getActivity(), aBoolean -> binding.swpMovie.setRefreshing(aBoolean));
 
             viewModel.getErrorMsg().observe(getViewLifecycleOwner(), msg -> {
                 Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-                binding.pbMovie.setVisibility(View.GONE);
+                binding.swpMovie.setRefreshing(false);
             });
+
+            binding.swpMovie.setOnRefreshListener(this::getDatas);
         }
+    }
+
+    private void getDatas() {
+        viewModel.getMovieList().observe(getViewLifecycleOwner(), movieEntities -> {
+            binding.rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.rvMovie.setHasFixedSize(true);
+            binding.rvMovie.setAdapter(new MovieAdapter(movieEntities));
+        });
     }
 }

@@ -23,7 +23,7 @@ import xyz.themanusia.submissionjetpack2.network.api.ApiConfig;
 import xyz.themanusia.submissionjetpack2.ui.home.HomeActivity;
 import xyz.themanusia.submissionjetpack2.viewmodel.ViewModelFactory;
 
-public class    DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV = "extra_tv";
@@ -31,6 +31,7 @@ public class    DetailActivity extends AppCompatActivity {
     public static final String IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
 
     private ActivityDetailBinding binding;
+    private DetailViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,33 +47,17 @@ public class    DetailActivity extends AppCompatActivity {
         }
 
         ViewModelFactory factory = ViewModelFactory.getInstance(new ApiConfig());
-        DetailViewModel viewModel = new ViewModelProvider(this, factory).get(DetailViewModel.class);
+        viewModel = new ViewModelProvider(this, factory).get(DetailViewModel.class);
+        bindData();
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            if (extras.getInt(EXTRA_MOVIE) != 0) {
-                int movieId = extras.getInt(EXTRA_MOVIE);
-                viewModel.setMovieId(movieId);
-                viewModel.getMovieDetail().observe(this, this::bindMovie);
-            } else if (extras.getInt(EXTRA_TV) != 0) {
-                int tvId = extras.getInt(EXTRA_TV);
-                viewModel.setTvId(tvId);
-                viewModel.getTvDetail().observe(this, this::bindTv);
-            }
-        }
-
-        viewModel.getIsLoading().observe(this, aBoolean -> {
-            if (aBoolean) {
-                binding.progressBar.setVisibility(View.VISIBLE);
-            } else {
-                binding.progressBar.setVisibility(View.GONE);
-            }
-        });
+        viewModel.getIsLoading().observe(this, aBoolean -> binding.swpDetail.setRefreshing(aBoolean));
 
         viewModel.getErrorMsg().observe(this, msg -> {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-            binding.progressBar.setVisibility(View.GONE);
+            binding.swpDetail.setRefreshing(false);
         });
+
+        binding.swpDetail.setOnRefreshListener(this::bindData);
     }
 
     @Override
@@ -95,6 +80,21 @@ public class    DetailActivity extends AppCompatActivity {
         return true;
     }
 
+    private void bindData() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (extras.getInt(EXTRA_MOVIE) != 0) {
+                int movieId = extras.getInt(EXTRA_MOVIE);
+                viewModel.setMovieId(movieId);
+                viewModel.getMovieDetail().observe(this, this::bindMovie);
+            } else if (extras.getInt(EXTRA_TV) != 0) {
+                int tvId = extras.getInt(EXTRA_TV);
+                viewModel.setTvId(tvId);
+                viewModel.getTvDetail().observe(this, this::bindTv);
+            }
+        }
+    }
+
     private void share() {
         String mimeType = "text/plain";
         new ShareCompat.IntentBuilder(this)
@@ -111,7 +111,7 @@ public class    DetailActivity extends AppCompatActivity {
         binding.tvYear.setText(tvEntity.getYear());
 
         Glide.with(this)
-                .load(IMAGE_PATH+tvEntity.getImage())
+                .load(IMAGE_PATH + tvEntity.getImage())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.ic_baseline_warning_24)
                         .error(R.drawable.ic_baseline_warning_24))
@@ -125,7 +125,7 @@ public class    DetailActivity extends AppCompatActivity {
         binding.tvYear.setText(movieEntity.getYear());
 
         Glide.with(this)
-                .load(IMAGE_PATH+movieEntity.getImage())
+                .load(IMAGE_PATH + movieEntity.getImage())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.ic_baseline_warning_24)
                         .error(R.drawable.ic_baseline_warning_24))
