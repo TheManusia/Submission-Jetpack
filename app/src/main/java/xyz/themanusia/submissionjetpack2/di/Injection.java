@@ -7,7 +7,7 @@ import xyz.themanusia.submissionjetpack2.utils.ApiHelper;
 
 public class Injection {
     public static Repository provideRepository(ApiConfig apiConfig) {
-        RemoteDataSource remoteDataSource = new RemoteDataSource(new ApiHelper(apiConfig));
+        RemoteDataSource remoteDataSource = RemoteDataSource.getInstance(new ApiHelper(apiConfig));
 
         return Repository.getInstance(remoteDataSource);
     }

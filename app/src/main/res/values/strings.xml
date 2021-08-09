@@ -10,4 +10,5 @@
     <string name="share">Share</string>
     <string name="share_text">Watch %s now.</string>
     <string name="splash_logo">Splash Logo</string>
+    <string name="share_now">Share Now</string>
 </resources>

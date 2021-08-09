@@ -7,7 +7,7 @@ public class RemoteDataSource {
     private static RemoteDataSource INSTANCE;
     private final ApiHelper apiHelper;
 
-    public RemoteDataSource(ApiHelper apiHelper) {
+    private RemoteDataSource(ApiHelper apiHelper) {
         this.apiHelper = apiHelper;
     }
 

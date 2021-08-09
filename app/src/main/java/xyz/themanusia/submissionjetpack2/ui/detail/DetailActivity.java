@@ -99,7 +99,7 @@ public class    DetailActivity extends AppCompatActivity {
         String mimeType = "text/plain";
         new ShareCompat.IntentBuilder(this)
                 .setType(mimeType)
-                .setChooserTitle("Share now")
+                .setChooserTitle(getResources().getString(R.string.share_now))
                 .setText(getResources().getString(R.string.share_text, binding.tvTitle.getText()))
                 .startChooser();
     }
