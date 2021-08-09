@@ -10,8 +10,7 @@ import xyz.themanusia.submissionjetpack2.data.MovieEntity;
 import xyz.themanusia.submissionjetpack2.data.TvEntity;
 import xyz.themanusia.submissionjetpack2.data.source.remote.DataSource;
 import xyz.themanusia.submissionjetpack2.data.source.remote.RemoteDataSource;
-import xyz.themanusia.submissionjetpack2.data.source.remote.response.MovieResponse;
-import xyz.themanusia.submissionjetpack2.data.source.remote.response.TvResponse;
+import xyz.themanusia.submissionjetpack2.data.source.remote.response.Response;
 import xyz.themanusia.submissionjetpack2.utils.ApiHelper;
 import xyz.themanusia.submissionjetpack2.utils.EspressoIdlingResource;
 
@@ -42,16 +41,16 @@ public class Repository implements DataSource {
         MutableLiveData<List<MovieEntity>> movies = new MutableLiveData<>();
         remoteDataSource.getMovieList(new ApiHelper.LoadMovieListCallback() {
             @Override
-            public void onLoadMovieList(List<MovieResponse> movieResponses) {
+            public void onLoadMovieList(List<Response> movieRespons) {
                 List<MovieEntity> movieEntities = new ArrayList<>();
-                for (MovieResponse movieResponse : movieResponses) {
+                for (Response responses : movieRespons) {
                     movieEntities.add(new MovieEntity(
-                            movieResponse.getMovieId(),
-                            movieResponse.getTitle(),
-                            movieResponse.getOverview(),
-                            movieResponse.getImage(),
-                            movieResponse.getRating(),
-                            movieResponse.getYear()
+                            responses.getId(),
+                            responses.getTitle(),
+                            responses.getOverview(),
+                            responses.getImage(),
+                            responses.getRating(),
+                            responses.getYear()
                     ));
                 }
                 movies.postValue(movieEntities);
@@ -72,14 +71,14 @@ public class Repository implements DataSource {
         MutableLiveData<MovieEntity> movie = new MutableLiveData<>();
         remoteDataSource.getMovieDetail(movieId, new ApiHelper.LoadMovieDetailCallback() {
             @Override
-            public void onLoadMovieDetail(MovieResponse movieResponse) {
+            public void onLoadMovieDetail(Response responses) {
                 movie.postValue(new MovieEntity(
-                        movieResponse.getMovieId(),
-                        movieResponse.getTitle(),
-                        movieResponse.getOverview(),
-                        movieResponse.getImage(),
-                        movieResponse.getRating(),
-                        movieResponse.getYear()
+                        responses.getId(),
+                        responses.getTitle(),
+                        responses.getOverview(),
+                        responses.getImage(),
+                        responses.getRating(),
+                        responses.getYear()
                 ));
                 EspressoIdlingResource.decrement();
             }
@@ -98,16 +97,16 @@ public class Repository implements DataSource {
         MutableLiveData<List<TvEntity>> tvs = new MutableLiveData<>();
         remoteDataSource.getTvList(new ApiHelper.LoadTvListCallback() {
             @Override
-            public void onLoadTvListovieList(List<TvResponse> tvResponses) {
+            public void onLoadTvListovieList(List<Response> respons) {
                 List<TvEntity> tvEntities = new ArrayList<>();
-                for (TvResponse tvResponse : tvResponses) {
+                for (Response response : respons) {
                     tvEntities.add(new TvEntity(
-                            tvResponse.getTvId(),
-                            tvResponse.getTitle(),
-                            tvResponse.getOverview(),
-                            tvResponse.getImage(),
-                            tvResponse.getRating(),
-                            tvResponse.getYear()
+                            response.getId(),
+                            response.getTitle(),
+                            response.getOverview(),
+                            response.getImage(),
+                            response.getRating(),
+                            response.getYear()
                     ));
                 }
                 tvs.postValue(tvEntities);
@@ -128,14 +127,14 @@ public class Repository implements DataSource {
         MutableLiveData<TvEntity> tvs = new MutableLiveData<>();
         remoteDataSource.getTvDetail(tvId, new ApiHelper.LoadTvDetailCallback() {
             @Override
-            public void onLoadTvDetail(TvResponse tvResponse) {
+            public void onLoadTvDetail(Response response) {
                 tvs.postValue(new TvEntity(
-                        tvResponse.getTvId(),
-                        tvResponse.getTitle(),
-                        tvResponse.getOverview(),
-                        tvResponse.getImage(),
-                        tvResponse.getRating(),
-                        tvResponse.getYear()
+                        response.getId(),
+                        response.getTitle(),
+                        response.getOverview(),
+                        response.getImage(),
+                        response.getRating(),
+                        response.getYear()
                 ));
                 EspressoIdlingResource.decrement();
             }

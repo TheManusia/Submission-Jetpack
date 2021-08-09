@@ -12,8 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Parcel
-public class TvResponse {
-    int tvId;
+public class Response {
+    int id;
     String title;
     String overview;
     String image;

@@ -16,8 +16,7 @@ import org.junit.Test;
 import java.util.List;
 
 import xyz.themanusia.submissionjetpack2.data.source.remote.RemoteDataSource;
-import xyz.themanusia.submissionjetpack2.data.source.remote.response.MovieResponse;
-import xyz.themanusia.submissionjetpack2.data.source.remote.response.TvResponse;
+import xyz.themanusia.submissionjetpack2.data.source.remote.response.Response;
 import xyz.themanusia.submissionjetpack2.utils.ApiHelper;
 import xyz.themanusia.submissionjetpack2.utils.DataDummy;
 import xyz.themanusia.submissionjetpack2.utils.LiveDataTestUtils;
@@ -29,10 +28,10 @@ public class RepositoryTest {
     private final RemoteDataSource remoteDataSource = mock(RemoteDataSource.class);
     private final FakeRepository repository = new FakeRepository(remoteDataSource);
 
-    private final List<MovieResponse> dummyMovies = DataDummy.generateMovieDataResponses();
-    private final List<TvResponse> dummyTvs = DataDummy.generateTvDataResponses();
-    private final MovieResponse dummyMovie = DataDummy.generateMovieDataResponses().get(0);
-    private final TvResponse dummyTv = DataDummy.generateTvDataResponses().get(0);
+    private final List<Response> dummyMovies = DataDummy.generateMovieDataResponses();
+    private final List<Response> dummyTvs = DataDummy.generateTvDataResponses();
+    private final Response dummyMovie = DataDummy.generateMovieDataResponses().get(0);
+    private final Response dummyTv = DataDummy.generateTvDataResponses().get(0);
     private final int movieId = DataDummy.generateMovieData().get(0).getMovieId();
     private final int tvId = DataDummy.generateTvData().get(0).getTvId();
     
@@ -62,7 +61,7 @@ public class RepositoryTest {
 
         assertNotNull(movieEntity);
         assertNotNull(movieEntity);
-        assertEquals(movieEntity.getMovieId(), dummyMovie.getMovieId());
+        assertEquals(movieEntity.getMovieId(), dummyMovie.getId());
         assertEquals(movieEntity.getTitle(), dummyMovie.getTitle());
         assertEquals(movieEntity.getOverview(), dummyMovie.getOverview());
         assertEquals(movieEntity.getImage(), dummyMovie.getImage());
@@ -95,7 +94,7 @@ public class RepositoryTest {
         TvEntity tvEntity = LiveDataTestUtils.getValue(repository.getTvDetail(tvId));
         verify(remoteDataSource).getTvDetail(eq(tvId), any(ApiHelper.LoadTvDetailCallback.class));
         assertNotNull(tvEntity);
-        assertEquals(tvEntity.getTvId(), dummyTv.getTvId());
+        assertEquals(tvEntity.getTvId(), dummyTv.getId());
         assertEquals(tvEntity.getTitle(), dummyTv.getTitle());
         assertEquals(tvEntity.getOverview(), dummyTv.getOverview());
         assertEquals(tvEntity.getImage(), dummyTv.getImage());
