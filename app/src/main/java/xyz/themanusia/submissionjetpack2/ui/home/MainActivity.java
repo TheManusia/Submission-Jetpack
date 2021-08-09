@@ -6,14 +6,15 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import xyz.themanusia.submissionjetpack2.R;
+import xyz.themanusia.submissionjetpack2.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setElevation(0);

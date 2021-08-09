@@ -18,7 +18,6 @@ public class SectionPagerAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
     }
 
-
     @Override
     public int getItemCount() {
         return 2;
