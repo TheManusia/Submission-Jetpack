@@ -9,4 +9,5 @@
     <string name="detail">Detail</string>
     <string name="share">Share</string>
     <string name="share_text">Watch %s now.</string>
+    <string name="splash_logo">Splash Logo</string>
 </resources>

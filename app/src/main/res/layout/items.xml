@@ -53,15 +53,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/title" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/tvTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            app:srcCompat="@drawable/ic_baseline_star_24" />
-
         <TextView
             android:id="@+id/tvRating"
             android:layout_width="wrap_content"
@@ -69,9 +60,9 @@
             android:layout_marginStart="4dp"
             tools:text="@string/rating"
             android:textColor="@color/sandy_brown"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/imageView5" />
+            app:drawableStartCompat="@drawable/ic_baseline_star_24"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
         <TextView
             android:id="@+id/tvOverview"
@@ -83,8 +74,8 @@
             android:maxLines="1"
             android:textColor="@color/gallery"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageView5"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            app:layout_constraintStart_toStartOf="@+id/tvRating"
+            app:layout_constraintTop_toBottomOf="@+id/tvRating"
             tools:text="@string/overview" />
 
 
