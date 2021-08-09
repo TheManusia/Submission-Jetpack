@@ -16,11 +16,6 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setElevation(0);
-            getSupportActionBar().setTitle("");
-        }
-
         new Handler().postDelayed(() -> {
                     startActivity(new Intent(MainActivity.this, HomeActivity.class));
                     finish();
