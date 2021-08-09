@@ -1,14 +1,11 @@
 package xyz.themanusia.submissionjetpack2.ui.home;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import xyz.themanusia.submissionjetpack2.R;
 import xyz.themanusia.submissionjetpack2.ui.movie.MovieFragment;
 import xyz.themanusia.submissionjetpack2.ui.tv.TvFragment;
 
