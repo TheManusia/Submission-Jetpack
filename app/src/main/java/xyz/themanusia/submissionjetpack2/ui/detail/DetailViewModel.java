@@ -30,4 +30,8 @@ public class DetailViewModel extends ViewModel {
     public LiveData<TvEntity> getTvDetail() {
         return repository.getTvDetail(tvId);
     }
+
+    public LiveData<String> getErrorMsg() {
+        return repository.getErrorMsg();
+    }
 }

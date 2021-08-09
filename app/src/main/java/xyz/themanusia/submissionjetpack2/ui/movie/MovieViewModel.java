@@ -22,4 +22,8 @@ public class MovieViewModel extends ViewModel {
     public LiveData<List<MovieEntity>> getMovieList() {
         return repository.getMovieList();
     }
+
+    public LiveData<String> getErrorMsg() {
+        return repository.getErrorMsg();
+    }
 }

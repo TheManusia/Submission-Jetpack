@@ -19,6 +19,7 @@ public class Repository implements DataSource {
     private final RemoteDataSource remoteDataSource;
 
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    private final MutableLiveData<String> errorMsg = new MutableLiveData<>();
 
     private Repository(RemoteDataSource remoteDataSource) {
         this.remoteDataSource = remoteDataSource;
@@ -61,6 +62,11 @@ public class Repository implements DataSource {
             public void onLoading(boolean status) {
                 isLoading.postValue(status);
             }
+
+            @Override
+            public void onFailure(String message) {
+                errorMsg.postValue(message);
+            }
         });
         return movies;
     }
@@ -86,6 +92,11 @@ public class Repository implements DataSource {
             @Override
             public void onLoading(boolean status) {
                 isLoading.postValue(status);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                errorMsg.postValue(message);
             }
         });
         return movie;
@@ -117,6 +128,11 @@ public class Repository implements DataSource {
             public void onLoading(boolean status) {
                 isLoading.postValue(status);
             }
+
+            @Override
+            public void onFailure(String message) {
+                errorMsg.postValue(message);
+            }
         });
         return tvs;
     }
@@ -143,6 +159,11 @@ public class Repository implements DataSource {
             public void onLoading(boolean status) {
                 isLoading.postValue(status);
             }
+
+            @Override
+            public void onFailure(String message) {
+                errorMsg.postValue(message);
+            }
         });
         return tvs;
     }
@@ -150,5 +171,10 @@ public class Repository implements DataSource {
     @Override
     public LiveData<Boolean> isLoading() {
         return isLoading;
+    }
+
+    @Override
+    public LiveData<String> getErrorMsg() {
+        return errorMsg;
     }
 }

@@ -56,6 +56,7 @@ public class ApiHelper {
             @Override
             public void onFailure(@NonNull Call<MovieApiResponse> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
+                callback.onFailure(t.getMessage());
             }
         });
     }
@@ -90,6 +91,7 @@ public class ApiHelper {
             @Override
             public void onFailure(@NonNull Call<TvApiResponse> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
+                callback.onFailure(t.getMessage());
             }
         });
     }
@@ -121,6 +123,7 @@ public class ApiHelper {
             @Override
             public void onFailure(@NonNull Call<MovieEntity> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
+                callback.onFailure(t.getMessage());
             }
         });
     }
@@ -152,6 +155,7 @@ public class ApiHelper {
             @Override
             public void onFailure(@NonNull Call<TvEntity> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
+                callback.onFailure(t.getMessage());
             }
         });
     }
@@ -160,23 +164,31 @@ public class ApiHelper {
         void onLoadMovieList(List<Response> movieRespons);
 
         void onLoading(boolean status);
+
+        void onFailure(String message);
     }
 
     public interface LoadTvListCallback {
         void onLoadTvListovieList(List<Response> respons);
 
         void onLoading(boolean status);
+
+        void onFailure(String message);
     }
 
     public interface LoadMovieDetailCallback {
         void onLoadMovieDetail(Response responses);
 
         void onLoading(boolean status);
+
+        void onFailure(String message);
     }
 
     public interface LoadTvDetailCallback {
         void onLoadTvDetail(Response response);
 
         void onLoading(boolean status);
+
+        void onFailure(String message);
     }
 }

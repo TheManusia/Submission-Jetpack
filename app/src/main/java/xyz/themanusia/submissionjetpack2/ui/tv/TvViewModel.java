@@ -22,4 +22,8 @@ public class TvViewModel extends ViewModel {
     public LiveData<List<TvEntity>> getTvList() {
         return repository.getTvList();
     }
+
+    public LiveData<String> getErrorMsg() {
+        return repository.getErrorMsg();
+    }
 }

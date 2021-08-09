@@ -10,11 +10,13 @@ import xyz.themanusia.submissionjetpack2.data.source.remote.DataSource;
 import xyz.themanusia.submissionjetpack2.data.source.remote.RemoteDataSource;
 import xyz.themanusia.submissionjetpack2.data.source.remote.response.Response;
 import xyz.themanusia.submissionjetpack2.utils.ApiHelper;
+import xyz.themanusia.submissionjetpack2.utils.EspressoIdlingResource;
 
 public class FakeRepository implements DataSource {
     private final RemoteDataSource remoteDataSource;
 
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    private final MutableLiveData<String> errorMsg = new MutableLiveData<>();
 
     public FakeRepository(RemoteDataSource remoteDataSource) {
         this.remoteDataSource = remoteDataSource;
@@ -22,6 +24,7 @@ public class FakeRepository implements DataSource {
 
     @Override
     public LiveData<List<MovieEntity>> getMovieList() {
+        EspressoIdlingResource.increment();
         MutableLiveData<List<MovieEntity>> movies = new MutableLiveData<>();
         remoteDataSource.getMovieList(new ApiHelper.LoadMovieListCallback() {
             @Override
@@ -38,11 +41,17 @@ public class FakeRepository implements DataSource {
                     ));
                 }
                 movies.postValue(movieEntities);
+                EspressoIdlingResource.decrement();
             }
 
             @Override
             public void onLoading(boolean status) {
                 isLoading.postValue(status);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                errorMsg.postValue(message);
             }
         });
         return movies;
@@ -50,6 +59,7 @@ public class FakeRepository implements DataSource {
 
     @Override
     public LiveData<MovieEntity> getMovieDetail(int movieId) {
+        EspressoIdlingResource.increment();
         MutableLiveData<MovieEntity> movie = new MutableLiveData<>();
         remoteDataSource.getMovieDetail(movieId, new ApiHelper.LoadMovieDetailCallback() {
             @Override
@@ -62,11 +72,17 @@ public class FakeRepository implements DataSource {
                         responses.getRating(),
                         responses.getYear()
                 ));
+                EspressoIdlingResource.decrement();
             }
 
             @Override
             public void onLoading(boolean status) {
                 isLoading.postValue(status);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                errorMsg.postValue(message);
             }
         });
         return movie;
@@ -74,6 +90,7 @@ public class FakeRepository implements DataSource {
 
     @Override
     public LiveData<List<TvEntity>> getTvList() {
+        EspressoIdlingResource.increment();
         MutableLiveData<List<TvEntity>> tvs = new MutableLiveData<>();
         remoteDataSource.getTvList(new ApiHelper.LoadTvListCallback() {
             @Override
@@ -90,11 +107,17 @@ public class FakeRepository implements DataSource {
                     ));
                 }
                 tvs.postValue(tvEntities);
+                EspressoIdlingResource.decrement();
             }
 
             @Override
             public void onLoading(boolean status) {
                 isLoading.postValue(status);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                errorMsg.postValue(message);
             }
         });
         return tvs;
@@ -102,6 +125,7 @@ public class FakeRepository implements DataSource {
 
     @Override
     public LiveData<TvEntity> getTvDetail(int tvId) {
+        EspressoIdlingResource.increment();
         MutableLiveData<TvEntity> tvs = new MutableLiveData<>();
         remoteDataSource.getTvDetail(tvId, new ApiHelper.LoadTvDetailCallback() {
             @Override
@@ -114,11 +138,17 @@ public class FakeRepository implements DataSource {
                         response.getRating(),
                         response.getYear()
                 ));
+                EspressoIdlingResource.decrement();
             }
 
             @Override
             public void onLoading(boolean status) {
                 isLoading.postValue(status);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                errorMsg.postValue(message);
             }
         });
         return tvs;
@@ -127,5 +157,10 @@ public class FakeRepository implements DataSource {
     @Override
     public LiveData<Boolean> isLoading() {
         return isLoading;
+    }
+
+    @Override
+    public LiveData<String> getErrorMsg() {
+        return errorMsg;
     }
 }

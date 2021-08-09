@@ -18,4 +18,6 @@ public interface DataSource {
     LiveData<TvEntity> getTvDetail(int tvId);
 
     LiveData<Boolean> isLoading();
+
+    LiveData<String> getErrorMsg();
 }
